@@ -41,9 +41,9 @@ socket.on('connect', function () {
 var getDevices = socket.on('devices', function (devices, callback) {
     //console.log("ietS", devices[4].name);
     //console.log(devices)
-    
+
     var iets = devices[4].name;
- 
+
 });
 
 var io = require('socket.io').listen(server);
@@ -58,7 +58,7 @@ app.get('/', function (req, res, devices) {
         { name: 'Scotch', drunkness: 10 }
     ];
 
-    res.render('index',{
+    res.render('index', {
         drinks: drinks
     });
 });
