@@ -8,7 +8,7 @@ var server = http.createServer(function (req, res) {
         res.end(content);
     });
 });
-//tes t
+//test
 var io = require('socket.io-client');
 
 var host = '192.168.0.120';
