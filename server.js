@@ -38,16 +38,20 @@ socket.on('connect', function () {
 
 
 //get list of devices
-var ii = socket.on('devices', function (devices) {
-    console.log("ietS", devices[4].name);
+var getDevices = socket.on('devices', function (devices, callback) {
+    //console.log("ietS", devices[4].name);
+    //console.log(devices)
+    
     var iets = devices[4].name;
+ 
 });
 
 var io = require('socket.io').listen(server);
 // use res.render to load up an ejs view file
 
 // change to device.name
-app.get('/', function (req, res) {
+app.get('/', function (req, res, devices) {
+    console.log(devices);
     var drinks = [
         { name: 'Bloody Mary', drunkness: 3 },
         { name: 'Martini', drunkness: 5 },
