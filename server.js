@@ -3,6 +3,7 @@
 var express = require('express');
 var app = express();
 
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
@@ -54,6 +55,7 @@ socket.on('connect', function() {
     app.get('/', function(req, res, devices) {
         var device = socket.device;
         console.log(device);
+        //console.log("Session: %j", device);
         // drinks should be replaced by devices
         var drinks = [
             { name: socket.device, drunkness: 3 },

@@ -36,13 +36,11 @@
     socket.emit('my other event', { my: 'data' });
   });
 </script>
-
+<%= dev %>
 <% for (var i=0; i < dev.lenght; i++){ %>
 <li><%= dev[i].id %></li>
 <% } %>
-<!--     <% drinks.forEach(function(drink) { %>
-        <li><%= drink.name %> - <%= drink.drunkness %></li>
-    <% }); %>-->
+
 
  <footer>
         <% include ../partials/footer %>
