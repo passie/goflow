@@ -19,8 +19,9 @@
     <script>
         var socket = io.connect('http://localhost:8080');
         socket.on('message', function (message) {
-            alert('The server has a message for you: ' + message);
-
+            console.log(data);
+            alert('The server has a message for you: ' + devices);
+             socket.emit('my other event', { my: 'data' });       
         })
 
         $('#poke').click(function () {
@@ -28,9 +29,19 @@
         })
 
     </script>
-     <% drinks.forEach(function(drink) { %>
-        <li><%= drink.name %> - <%= drink.drunkness %></li>
-    <% }); %>
+    <script>
+  var socket = io.connect('http://localhost');
+  socket.on('news', function (data) {
+    console.log(data);
+    socket.emit('my other event', { my: 'data' });
+  });
+</script>
+
+<% for (var i=0; i < dev.lenght; i++){ %>
+<li><%= dev[i].id %></li>
+<% } %>
+
+
  <footer>
         <% include ../partials/footer %>
     </footer>

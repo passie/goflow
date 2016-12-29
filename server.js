@@ -20,8 +20,8 @@ var server = http.createServer(function(req, res) {
 //test
 var io = require('socket.io-client');
 
-var host = 'dinges.synology.me';
-var port = 9191;
+var host = '192.168.0.120';
+var port = 80;
 var u = encodeURIComponent('admin');
 var p = encodeURIComponent('leonisdebeste');
 var socket = io('http://' + host + ':' + port + '/?username=' + u + '&password=' + p, {
@@ -32,43 +32,47 @@ var socket = io('http://' + host + ':' + port + '/?username=' + u + '&password='
     forceNew: true
 });
 
+
 socket.on('connect', function() {
     console.log('connected to pimatic');
-});
 
 
+    //get list of devices and save for later
+    socket.on('devices', function(getDevices) {
+        var device = getDevices[1].name;
+        //console.log(getDevices);
+        //console.log("iets", getDevices[4].name);
+        socket.device = getDevices;
+        console.log(getDevices);
 
-
-//get list of devices and save for later
-var getDevices = socket.on('devices', function(getDevices) {
-    var device = getDevices[1].name;
-    console.log("iets", getDevices[4].name);
-
-    var iets = getDevices[4].name;
-
-});
-
-var io = require('socket.io').listen(server);
-// use res.render to load up an ejs view file
-
-// use data from getDevices and send to index.ejs
-app.get('/', function(req, res, devices) {
-
-    // drinks should be replaced by devices
-    var drinks = [
-        { name: 'Bloody Mary', drunkness: 3 },
-        { name: 'Martini', drunkness: 5 },
-        { name: 'Scotch', drunkness: 10 }
-    ];
-    //use devices
-    res.render('index', {
-        drinks: drinks
     });
-});
 
-app.get('/about', function(req, res) {
-    res.render('pages/about');
-});
+    var io = require('socket.io').listen(server);
+    // use res.render to load up an ejs view file
 
-app.listen(8080);
-console.log('8080 is the magic port');
+    // use data from getDevices and send to index.ejs
+    app.get('/', function(req, res, devices) {
+        var device = socket.device;
+        console.log(device);
+        // drinks should be replaced by devices
+        var drinks = [
+            { name: socket.device, drunkness: 3 },
+            { name: 'Martini', drunkness: 5 },
+            { name: 'Scotch', drunkness: 10 }
+        ];
+        //use devices
+        res.render('index', {
+            //drinks: drinks
+            dev: device
+        });
+    });
+
+    app.get('/about', function(req, res) {
+        res.render('pages/about');
+    });
+
+    app.listen(8080);
+    console.log('8080 is the magic port');
+
+
+});
