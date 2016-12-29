@@ -11,8 +11,8 @@ var http = require('http');
 var fs = require('fs');
 
 // Loading the index file . html displayed to the client
-var server = http.createServer(function (req, res) {
-    fs.readFile('./index.ejs', 'utf-8', function (error, content) {
+var server = http.createServer(function(req, res) {
+    fs.readFile('./index.ejs', 'utf-8', function(error, content) {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(content);
     });
@@ -32,26 +32,29 @@ var socket = io('http://' + host + ':' + port + '/?username=' + u + '&password='
     forceNew: true
 });
 
-socket.on('connect', function () {
+socket.on('connect', function() {
     console.log('connected to pimatic');
 });
 
 
-//get list of devices
-var getDevices = socket.on('devices', function (devices, callback) {
-    //console.log("ietS", devices[4].name);
-    //console.log(devices)
 
-    var iets = devices[4].name;
+
+//get list of devices and save for later
+var getDevices = socket.on('devices', function(getDevices) {
+    var device = getDevices[1].name;
+    console.log("iets", getDevices[4].name);
+
+    var iets = getDevices[4].name;
 
 });
 
 var io = require('socket.io').listen(server);
 // use res.render to load up an ejs view file
 
-// change to device.name
-app.get('/', function (req, res, devices) {
-    console.log(devices);
+// use data from getDevices and send to index.ejs
+app.get('/', function(req, res, devices) {
+
+    // drinks should be replaced by devices
     var drinks = [
         { name: 'Bloody Mary', drunkness: 3 },
         { name: 'Martini', drunkness: 5 },
@@ -63,7 +66,7 @@ app.get('/', function (req, res, devices) {
     });
 });
 
-app.get('/about', function (req, res) {
+app.get('/about', function(req, res) {
     res.render('pages/about');
 });
 
