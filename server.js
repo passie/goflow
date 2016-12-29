@@ -60,7 +60,7 @@ app.get('/', function(req, res, devices) {
         { name: 'Martini', drunkness: 5 },
         { name: 'Scotch', drunkness: 10 }
     ];
-
+    //use devices
     res.render('index', {
         drinks: drinks
     });
