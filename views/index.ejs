@@ -9,7 +9,7 @@
     <header>
         <% include ../partials/header %>
     </header>
-    <h1>Communicating with socket .io!</h1>
+    <h1>GoFlow</h1>
 
    
 
@@ -32,7 +32,16 @@
     </script>
     <script>
   $( function() {
-    $( ".drag" ).draggable({ revert: true });
+    $( ".drag" ).draggable({ revert: 'invalid' });
+
+    $("#droppable").droppable({
+    accept: '#draggable',
+    activeClass: 'ui-state-hover',
+    hoverClass: 'ui-state-active',
+    drop: function(event, ui) {
+        $(this).addClass('ui-state-highlight').find('p').html('Dropped!');
+    }
+});
   } );
   </script>
     <script>
@@ -44,14 +53,42 @@
 </script>
 
 
-<% for(var i=0; i < dev.length; i++) { %>
+
+
+
+<div class="row">
+  <div class="col-xs-6 col-sm-3" STYLE="background-color: #c9c9c9;">
+  <span class="title">Devices</span>
+  <div id="draggable" class='drag' name="sunrise">
+  <p>sunrise</p>
+  </div>
+  <% for(var i=0; i < dev.length; i++) { %>
+  
    <div id="draggable" class='drag' name="<%= dev[i].id %>">
    <p><%= dev[i].name %></p>
    </div>
 <% } %>
+</div>
 
-
-
+  <div class="col-xs-6 col-sm-3" STYLE="background-color: pink;">
+  <span class="title">If....</span><br>
+    <div id="draggable" class='drag' name="sunrise">
+  <p>sunrise</p>
+  </div>
+  <div id="droppable" > drop me here </div>
+  </div>
+  
+  <div class="col-xs-6 col-sm-3">
+  <span class="title">And....</span><br>
+  </div>
+  
+  <div class="col-xs-6 col-sm-3"> 
+  <span class="title">Then....</span><br>
+  <div STYLE="background-color: red;">turn TuinWandLamp off</div>
+  <br>
+  <button id="button">Send</button>
+  </div>
+</div>
 
 
 

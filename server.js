@@ -44,17 +44,31 @@ socket.on('connect', function() {
         //console.log(getDevices);
         //console.log("iets", getDevices[4].name);
         socket.device = getDevices;
-        console.log(getDevices);
+        //console.log(getDevices);
 
     });
 
+
+    socket.on('variables', function(getVariables) {
+        var device = getVariables[1].name;
+        //console.log(getDevices);
+        //console.log("iets", getDevices[4].name);
+        socket.variable = getVariables;
+        //console.log(getVariables);
+
+    });
+
+
     var io = require('socket.io').listen(server);
+
     // use res.render to load up an ejs view file
 
     // use data from getDevices and send to index.ejs
     app.get('/', function(req, res, devices) {
         var device = socket.device;
-        console.log(device);
+        var variable = socket.variable;
+        //console.log(device);
+        //console.log(variable);
         //console.log("Session: %j", device);
         // drinks should be replaced by devices
         var drinks = [
@@ -65,7 +79,8 @@ socket.on('connect', function() {
         //use devices
         res.render('index', {
             //drinks: drinks
-            dev: device
+            dev: device,
+            devvar: variable
         });
     });
 
