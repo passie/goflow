@@ -6,10 +6,8 @@
 </head>
 
 <body class="container">
-    <header>
-        <% include ../partials/header %>
-    </header>
-    <h1>GoFlow</h1>
+   <div id="container1">
+    <h1><span id="htitle" class="htitle">(GoFlow)</span></h1><br>
 
    
 
@@ -18,7 +16,8 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
     <script>
-        var socket = io.connect('http://localhost:8080');
+        var socket = io.connect();
+        
         socket.on('message', function (message) {
             console.log(data);
             alert('The server has a message for you: ' + devices);
@@ -34,7 +33,7 @@
   $( function() {
     $( ".drag" ).draggable({ revert: 'invalid' });
 
-    $("#droppable").droppable({
+    $(".droppable").droppable({
     accept: '#draggable',
     activeClass: 'ui-state-hover',
     hoverClass: 'ui-state-active',
@@ -45,57 +44,69 @@
   } );
   </script>
     <script>
-  var socket = io.connect('http://localhost');
+  var socket = io.connect();
   socket.on('news', function (data) {
     console.log(data);
     socket.emit('my other event', { my: 'data' });
   });
 </script>
 
-
-
-
-
 <div class="row">
-  <div class="col-xs-6 col-sm-3" STYLE="background-color: #c9c9c9;">
+  <div id="devices" class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
   <span class="title">Devices</span>
-  <div id="draggable" class='drag' name="sunrise">
-  <p>sunrise</p>
-  </div>
+  <br>
+  <center>
+ 
   <% for(var i=0; i < dev.length; i++) { %>
   
    <div id="draggable" class='drag' name="<%= dev[i].id %>">
-   <p><%= dev[i].name %></p>
+  <!-- <p><%= dev[i].name  %></p>-->
+   <%if (dev[i].template == 'switch'){ %> 
+      <p><img src="/img/lightbulb-on-outline.png" height=24 width=24><%= dev[i].name  %></p>
+  <% } else if (dev[i].template == 'dimmer'){ %>
+      <p><img src="/img/toggle-switch.png" height=24 width=24><%= dev[i].name  %></p>
+   <% } else { %>
+      <p><img src="/img/battery-unknown.png" height=24 width=24><%= dev[i].name  %></p>
+   <% } %>
+  
    </div>
-<% } %>
+    <% } %>
+</center>
 </div>
 
-  <div class="col-xs-6 col-sm-3" STYLE="background-color: pink;">
+  <div id="if" class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
   <span class="title">If....</span><br>
     <div id="draggable" class='drag' name="sunrise">
   <p>sunrise</p>
   </div>
-  <div id="droppable" > drop me here </div>
+
+  <div class="droppable" > drop me here </div>
   </div>
   
-  <div class="col-xs-6 col-sm-3">
+  <div class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
   <span class="title">And....</span><br>
+  <div class="droppable" > drop me here </div>
   </div>
   
   <div class="col-xs-6 col-sm-3"> 
   <span class="title">Then....</span><br>
-  <div STYLE="background-color: red;">turn TuinWandLamp off</div>
+  <div STYLE="border: 1px solid rgba(0,0,0,0.1);">turn TuinWandLamp off</div>
   <br>
-  <button id="button">Send</button>
+
+  <ul id="messages"></ul>
+    <form action="">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+  
   </div>
 </div>
 
 
 
- <footer>
+ <footer class="footer">
         <% include ../partials/footer %>
     </footer>
-        
+        </div>
             </body>
 
             </html>

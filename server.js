@@ -7,19 +7,21 @@ var app = express();
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
+app.use(express.static(__dirname + '/public'));
 
 var http = require('http');
 var fs = require('fs');
 
 // Loading the index file . html displayed to the client
-var server = http.createServer(function(req, res) {
+/*var server = http.createServer(function(req, res) {
     fs.readFile('./index.ejs', 'utf-8', function(error, content) {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(content);
     });
-});
+});*/
 //test
 var io = require('socket.io-client');
+
 
 var host = '192.168.0.120';
 var port = 80;
@@ -45,12 +47,13 @@ socket.on('connect', function() {
         //console.log("iets", getDevices[4].name);
         socket.device = getDevices;
         //console.log(getDevices);
+        console.log(socket.device);
 
     });
 
 
     socket.on('variables', function(getVariables) {
-        var device = getVariables[1].name;
+        //var device = getVariables[1].name;
         //console.log(getDevices);
         //console.log("iets", getDevices[4].name);
         socket.variable = getVariables;
@@ -59,23 +62,31 @@ socket.on('connect', function() {
     });
 
 
-    var io = require('socket.io').listen(server);
+    socket.on('connection', function(socket) {
+        socket.on('chat message', function(msg) {
+            console.log('message: ' + msg);
+        });
+    });
+
+
+    // var io = require('socket.io').listen(server);
 
     // use res.render to load up an ejs view file
 
     // use data from getDevices and send to index.ejs
     app.get('/', function(req, res, devices) {
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
         var device = socket.device;
         var variable = socket.variable;
         //console.log(device);
         //console.log(variable);
         //console.log("Session: %j", device);
         // drinks should be replaced by devices
-        var drinks = [
-            { name: socket.device, drunkness: 3 },
-            { name: 'Martini', drunkness: 5 },
-            { name: 'Scotch', drunkness: 10 }
-        ];
+        /* var drinks = [
+             { name: socket.device, drunkness: 3 },
+             { name: 'Martini', drunkness: 5 },
+             { name: 'Scotch', drunkness: 10 }
+         ];*/
         //use devices
         res.render('index', {
             //drinks: drinks
