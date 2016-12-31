@@ -53,8 +53,8 @@
 
 <div class="row">
   <div id="devices" class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
-  <span class="title">Devices</span>
-  <br>
+  <center><span class="title">Devices</span></center>
+  <br><br>
   <center>
  
   <% for(var i=0; i < dev.length; i++) { %>
@@ -75,38 +75,38 @@
 </div>
 
   <div id="if" class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
-  <span class="title">If....</span><br>
+  <span class="title">If....</span><br><br>
     <div id="draggable" class='drag' name="sunrise">
   <p>sunrise</p>
   </div>
 
-  <div class="droppable" > drop me here </div>
+  <div class="droppable" STYLE="border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
   </div>
   
   <div class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
-  <span class="title">And....</span><br>
-  <div class="droppable" > drop me here </div>
+  <span class="title">And....</span><br><br>
+  <div class="droppable" STYLE="border: 1px solid rgba(0,0,0,0.1);" > drop me here </div>
   </div>
   
   <div class="col-xs-6 col-sm-3"> 
-  <span class="title">Then....</span><br>
+  <span class="title">Then....</span><br><br>
   <div STYLE="border: 1px solid rgba(0,0,0,0.1);">turn TuinWandLamp off</div>
   <br>
 
   <ul id="messages"></ul>
     <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
+      <input id="m" autocomplete="off" type="text" value="turn TuinWandLamp off   .." /><button>Send</button>
     </form>
   
   </div>
 </div>
 
 
-
+ </div>
  <footer class="footer">
         <% include ../partials/footer %>
     </footer>
-        </div>
+       
             </body>
 
             </html>
