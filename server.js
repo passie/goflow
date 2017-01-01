@@ -78,14 +78,10 @@ socket.on('connect', function() {
     });
 
     socket.on('rules', function(rules) {
-        console.log(rules);
+        //console.log(rules);
     });
 
-    socket.on('connection', function(socket) {
-        socket.on('chat message', function(msg) {
-            console.log('message: ' + msg);
-        });
-    });
+
 
 
     // var io = require('socket.io').listen(server);
@@ -94,6 +90,7 @@ socket.on('connect', function() {
 
     // use data from getDevices and send to index.ejs
     app.get('/', function(req, res, devices) {
+
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
         var device = socket.device;
         var variable = socket.variable;
