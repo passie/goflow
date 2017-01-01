@@ -13,12 +13,12 @@ var http = require('http');
 var fs = require('fs');
 
 // Loading the index file . html displayed to the client
-/*var server = http.createServer(function(req, res) {
-    fs.readFile('./index.ejs', 'utf-8', function(error, content) {
+var server = http.createServer(function(req, res) {
+    fs.readFile('./test.ejs', 'utf-8', function(error, content) {
         res.writeHead(200, { "Content-Type": "text/html" });
         res.end(content);
     });
-});*/
+});
 //test
 var io = require('socket.io-client');
 
@@ -47,7 +47,7 @@ socket.on('connect', function() {
         //console.log("iets", getDevices[4].name);
         socket.device = getDevices;
         //console.log(getDevices);
-        console.log(socket.device);
+        //console.log(socket.device);
 
     });
 
@@ -61,6 +61,25 @@ socket.on('connect', function() {
 
     });
 
+
+    socket.on('rules', function(getRules) {
+        //var device = getVariables[1].name;
+        //console.log(getDevices);
+        //console.log("iets", getDevices[4].name);
+        socket.Rules = getRules;
+        //console.log(socket.Rules);
+
+    });
+    socket.on('predicatepresets', function(getPredicatePresets) {
+        //var device = getVariables[1].name;
+        //console.log(getDevices);
+        //console.log("iets", getDevices[4].name);
+        console.log(getPredicatePresets);
+    });
+
+    socket.on('rules', function(rules) {
+        console.log(rules);
+    });
 
     socket.on('connection', function(socket) {
         socket.on('chat message', function(msg) {
@@ -78,6 +97,7 @@ socket.on('connect', function() {
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
         var device = socket.device;
         var variable = socket.variable;
+        var rules = socket.Rules;
         //console.log(device);
         //console.log(variable);
         //console.log("Session: %j", device);
@@ -91,7 +111,8 @@ socket.on('connect', function() {
         res.render('index', {
             //drinks: drinks
             dev: device,
-            devvar: variable
+            devvar: variable,
+            rules: rules
         });
     });
 

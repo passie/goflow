@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Super Awesome</title>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <style>
+ html,body {
+    height:100%;
+    margin: 0;
+}
+
+  body    { padding-top:50px; 
+    
+    background-image: url("img/blurred-bg-2.jpg");
+    }
+
+    @font-face {
+  font-family: 'Tangerine';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Tangerine'), url('/fonts/ShorelinesScriptBold.otf') format('truetype');
+}
+.htitle {
+  font-family: 'Tangerine', serif;
+  }
+
+        .main,
+        .sidebar,
+        .3de,
+        .het {
+            float: none;
+            padding: 20px;
+            vertical-align: top;
+        }
+        
+        .container {
+            display: table;
+        }
+        
+        .main {
+           
+          
+            display: table-cell;
+        }
+        
+        .sidebar {
+           border-right: 1px solid rgba(0,0,0,0.1); 
+            display: table-cell;
+            
+        }
+
+        .de {
+            border-right: 1px solid rgba(0,0,0,0.1);
+            display: table-cell;
+           
+        }
+        .het {
+           
+            display: table-cell;
+           
+        }
+
+        .footer {
+   position:fixed;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+  
+}
+
+.draggable { width: 200px; border: 1px solid rgba(0,0,0,0.1); text-align: left; padding: 0.3em; cursor: move; margin: 5px;}
+  #draggable { width: 200px; border: 1px solid rgba(0,0,0,0.1); text-align: left; padding: 0.3em; cursor: move; margin: 5px;}
+  #droppable { width: 150px; height: 150px; padding: 0.5em; float: left; margin: 10px; }
+  .title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    color: rgba(0,0,0,0.25);
+    font-size: 20px;
+    line-height: 40px;
+    margin-top: -10px;
+    transition: all .2s;
+}
+    </style>
+
+
+</head>
+
+<body>
+<div class="wrapper">
+<h1><span id="htitle" class="htitle">(GoFlow)</span></h1>
+    <div class="container clearfix">
+        <div class="main">
+        <% for(var i=0; i < dev.length; i++) { %>
+  
+   <div  class='drag draggable' name="<%= dev[i].id %>">
+  <!-- <p><%= dev[i].name  %></p>-->
+   <%if (dev[i].template == 'switch'){ %> 
+      <p><img src="/img/lightbulb-on-outline.png" height=24 width=24><%= dev[i].name  %></p>
+  <% } else if (dev[i].template == 'dimmer'){ %>
+      <p><img src="/img/toggle-switch.png" height=24 width=24><%= dev[i].name  %></p>
+   <% } else { %>
+      <p><img src="/img/battery-unknown.png" height=24 width=24><%= dev[i].name  %></p>
+   <% } %>
+  
+   </div>
+    <% } %>
+        </div>
+
+        <div class="sidebar">
+        <div id="if" class="col-xs-6 col-sm-3 if" style="border-right: 1px solid rgba(0,0,0,0.1);">
+  <span class="title">If....</span><br><br>
+    <div id="draggable" class='drag' name="sunrise">
+  <p>sunrise</p>
+  </div>
+<span>
+  <div id="sortable" class="droppable" STYLE="height: 100%; border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
+  </span>
+  </div>
+        </div>
+        <div class="de">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, tortor in mattis mattis, arcu erat pharetra orci, at vestibulum lorem ante a felis.</div>
+         <div class="het">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam congue, tortor in mattis mattis, arcu erat pharetra orci, at vestibulum lorem ante a felis.</div>
+    </div>
+ <footer class="footer">
+        <% include ../partials/footer %>
+    </footer>
+    </div>
+</body>
+
+</html>

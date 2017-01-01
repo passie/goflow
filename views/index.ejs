@@ -3,18 +3,15 @@
 
 <head>
 <% include ../partials/head %>
-</head>
-
-<body class="container">
-   <div id="container1">
-    <h1><span id="htitle" class="htitle">(GoFlow)</span></h1><br>
-
-   
-
-
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+</head>
+
+<body class="container">
+   <div class="container1 clearfix">
+    <h1><span id="htitle" class="htitle">(GoFlow)</span></h1><br>
     <script>
         var socket = io.connect();
         
@@ -31,14 +28,14 @@
     </script>
     <script>
   $( function() {
-    $( ".drag" ).draggable({ revert: 'invalid' });
-
+    $( ".drag" ).draggable({ connectToSortable: ".sortable",revert: 'invalid', helper: "clone" });
+    $( ".sortable" ).sortable({ revert: true});
     $(".droppable").droppable({
-    accept: '#draggable',
+    accept: '.draggable',
     activeClass: 'ui-state-hover',
     hoverClass: 'ui-state-active',
     drop: function(event, ui) {
-        $(this).addClass('ui-state-highlight').find('p').html('Dropped!');
+        $(this).addClass('ui-state-highlight').find('p');
     }
 });
   } );
@@ -52,14 +49,26 @@
 </script>
 
 <div class="row">
-  <div id="devices" class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
-  <center><span class="title">Devices</span></center>
+
+<div id="rulediv">
+<span class="title">Select Rule..</span><br><br>
+ <select id="rulelist"> 
+  <% for(var i=0; i < rules.length; i++) { %>
+  <option  value="<%= rules[i].name %>"><%= rules[i].string %></option>
+  <% } %>
+</select>
+</div>
+
+
+
+  <div id="devices" class="col-xs-6 col-sm-3 devices" style="border-right: 1px solid rgba(0,0,0,0.1);">
+  <span class="title">Devices</span>
   <br><br>
   <center>
  
   <% for(var i=0; i < dev.length; i++) { %>
-  
-   <div id="draggable" class='drag' name="<%= dev[i].id %>">
+
+   <div  class='drag draggable' id="drag" name="<%= dev[i].id %>" data-value="<%= dev[i].name %>">
   <!-- <p><%= dev[i].name  %></p>-->
    <%if (dev[i].template == 'switch'){ %> 
       <p><img src="/img/lightbulb-on-outline.png" height=24 width=24><%= dev[i].name  %></p>
@@ -74,30 +83,42 @@
 </center>
 </div>
 
-  <div id="if" class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
-  <span class="title">If....</span><br><br>
-    <div id="draggable" class='drag' name="sunrise">
-  <p>sunrise</p>
-  </div>
-
-  <div class="droppable" STYLE="border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
+  <div id="when" class="col-xs-6 col-sm-3 if" style="border-right: 1px solid rgba(0,0,0,0.1);">
+  <span class="title">When....</span><br><br>
+  <div  class='drag draggable' id="drag" data-value="sunrise starts"><p><img src="/img/weather-sunny.png" height=24 width=24>Sunrise</p></div>
+<span>
+  <div class="sortable" class="droppable" STYLE="height: 100%; border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
+  </span>
   </div>
   
-  <div class="col-xs-6 col-sm-3" style="border-right: 1px solid rgba(0,0,0,0.1);">
+  <div class="col-xs-6 col-sm-3 and" style="border-right: 1px solid rgba(0,0,0,0.1);">
   <span class="title">And....</span><br><br>
-  <div class="droppable" STYLE="border: 1px solid rgba(0,0,0,0.1);" > drop me here </div>
+  
+ <div class="sortable" class="droppable" STYLE="height: 100%; border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
   </div>
   
-  <div class="col-xs-6 col-sm-3"> 
+  <div id="then" class="col-xs-6 col-sm-3 then"> 
   <span class="title">Then....</span><br><br>
-  <div STYLE="border: 1px solid rgba(0,0,0,0.1);">turn TuinWandLamp off</div>
+  <div class="sortable" class="droppable" STYLE="height: 100%; border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
   <br>
 
-  <ul id="messages"></ul>
-    <form action="">
-      <input id="m" autocomplete="off" type="text" value="turn TuinWandLamp off   .." /><button>Send</button>
-    </form>
   
+
+  <button id="btn1">Save rule</button>
+
+<script>
+$(document).ready(function(){
+    $("#btn1").click(function(){
+    //when sunset starts then switch tuinverlichting on
+    //"when it is after 01:00 and if tuinverlichting is turned on then switch tuinverlichting off"
+    var divValue = $("#when .drag").attr('data-value');
+    var thenValue = $("#then .drag").attr('data-value');
+      
+       // alert("text: " + $("#drag").text());
+       alert('when ' + divValue + ' then switch ' + thenValue + ' on');
+    });
+});
+</script>
   </div>
 </div>
 
