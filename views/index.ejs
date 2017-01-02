@@ -102,8 +102,7 @@
   <div class="sortable" class="droppable" STYLE="height: 100%; border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
   <br>
 
-  
-
+  <button id="btnR" type="reset" value="Cancel">Cancel</button>
   <button id="btn1">Save rule</button>
 
 <script>
@@ -113,9 +112,12 @@ $(document).ready(function(){
     //"when it is after 01:00 and if tuinverlichting is turned on then switch tuinverlichting off"
     var divValue = $("#when .drag").attr('data-value');
     var thenValue = $("#then .drag").attr('data-value');
-      
+    if (thenValue === undefined){
+    alert('Please add devices + events then click save rule'); 
+    } else {
        // alert("text: " + $("#drag").text());
        alert('when ' + divValue + ' then switch ' + thenValue + ' on');
+       }
     });
 });
 </script>

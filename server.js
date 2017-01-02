@@ -23,8 +23,8 @@ var server = http.createServer(function(req, res) {
 var io = require('socket.io-client');
 
 
-var host = '192.168.0.120';
-var port = 80;
+var host = 'dinges.synology.me';
+var port = 9191;
 var u = encodeURIComponent('admin');
 var p = encodeURIComponent('leonisdebeste');
 var socket = io('http://' + host + ':' + port + '/?username=' + u + '&password=' + p, {
