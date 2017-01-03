@@ -126,6 +126,8 @@ $(document).ready(function(){
     $("#btn1").click(function(){
     //when sunset starts then switch tuinverlichting on
     //"when it is after 01:00 and if tuinverlichting is turned on then switch tuinverlichting off"
+    //when its 8:00 or when its 7:00 then turn keukenlamp on
+    
     var divValue = $("#when .drag").attr('data-value');
     var thenValue = $("#then .drag").attr('data-value');
     if (thenValue === undefined){
