@@ -81,15 +81,14 @@ socket.on('connect', function() {
         //console.log(rules);
     });
 
-    socket.on('variables', function(variables) {
-        console.log("variables:", variables);
-    });
+    /*   socket.on('variables', function(variables) {
+           console.log("variables:", variables);
+       });
 
-    socket.on('variableValueChanged', function(data) {
-        console.log("variableValueChanged:", data);
-    });
+       socket.on('variableValueChanged', function(data) {
+           console.log("variableValueChanged:", data);
+       });*/
 
-    socket.on('rules', tc(rules) pimatic.updateFromJs({ rules }))
 
 
     // var io = require('socket.io').listen(server);
