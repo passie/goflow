@@ -81,6 +81,13 @@ socket.on('connect', function() {
         //console.log(rules);
     });
 
+    /*   socket.on('variables', function(variables) {
+           console.log("variables:", variables);
+       });
+
+       socket.on('variableValueChanged', function(data) {
+           console.log("variableValueChanged:", data);
+       });*/
 
 
 

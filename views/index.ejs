@@ -100,16 +100,34 @@
   <div id="then" class="col-xs-6 col-sm-3 then"> 
   <span class="title">Then....</span><br><br>
   <div class="sortable" class="droppable" STYLE="height: 100%; border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
-  <br>
+  <br> <br> <br> <br>
 
+  <input id="save" value="save ..."></input>
   <button id="btnR" type="reset" value="Cancel">Cancel</button>
   <button id="btn1">Save rule</button>
 
 <script>
+$(document).ready( function() {
+    $("#save").focus( function() {
+        if ( $(this).val()=="save ...") {
+            $(this).val('');
+        } 
+    });
+
+    $("#save").blur( function() {
+        if ( $(this).val()=="") {
+            $(this).val('save ...');
+        } 
+    });
+});
+
+
 $(document).ready(function(){
     $("#btn1").click(function(){
     //when sunset starts then switch tuinverlichting on
     //"when it is after 01:00 and if tuinverlichting is turned on then switch tuinverlichting off"
+    //when its 8:00 or when its 7:00 then turn keukenlamp on
+    
     var divValue = $("#when .drag").attr('data-value');
     var thenValue = $("#then .drag").attr('data-value');
     if (thenValue === undefined){
