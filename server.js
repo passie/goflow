@@ -89,7 +89,13 @@ socket.on('connect', function() {
            console.log("variableValueChanged:", data);
        });*/
 
+    socket.on('variables', function(variables) {
+        console.log("variables:", variables);
+    });
 
+    socket.on('variableValueChanged', function(data) {
+        console.log("variableValueChanged:", data);
+    });
 
     // var io = require('socket.io').listen(server);
 
@@ -102,7 +108,7 @@ socket.on('connect', function() {
         var device = socket.device;
         var variable = socket.variable;
         var rules = socket.Rules;
-        //console.log(device);
+        console.log(device);
         //console.log(variable);
         //console.log("Session: %j", device);
         // drinks should be replaced by devices

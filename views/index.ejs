@@ -71,21 +71,33 @@
    <div  class='drag draggable' id="drag" name="<%= dev[i].id %>" data-value="<%= dev[i].name %>">
   <!-- <p><%= dev[i].name  %></p>-->
    <%if (dev[i].template == 'switch'){ %> 
-      <p><img src="/img/lightbulb-on-outline.png" height=24 width=24><%= dev[i].name  %></p>
+      <p><img src="/img/lightbulb-on-outline.png" height=24 width=24><%= ' ' + dev[i].name  %></p>
   <% } else if (dev[i].template == 'dimmer'){ %>
-      <p><img src="/img/toggle-switch.png" height=24 width=24><%= dev[i].name  %></p>
+      <p><img src="/img/toggle-switch.png" height=24 width=24><%= ' ' + dev[i].name  %></p>
+
+      <% } else if (dev[i].config.class == 'OpenWeatherDevice'){ %>
+      <p><img src="/img/city.png" height=24 width=24><%= ' ' + dev[i].name  %></p>
+        <% } else if (dev[i].config.class == 'SystemSensor'){ %>
+      <p><img src="/img/monitor.png" height=24 width=24><%= ' ' + dev[i].name  %></p>
+              <% } else if (dev[i].config.class == 'AVRSensor'){ %>
+      <p><img src="/img/music-box.png" height=24 width=24> <%= ' ' + dev[i].name  %></p>
    <% } else { %>
-      <p><img src="/img/battery-unknown.png" height=24 width=24><%= dev[i].name  %></p>
+      <p><img src="/img/battery-unknown.png" height=24 width=24><%= ' ' + dev[i].name  %></p>
    <% } %>
-  
    </div>
     <% } %>
+      <span class="title">Events</span>
+      <br><br>
+        <div  class='drag draggable' id="drag" data-value="sunrise starts"><p><img src="/img/weather-sunset-up.png" height=24 width=24>Sunrise</p></div>
+           <div  class='drag draggable' id="drag" data-value="sunrise stops"><p><img src="/img/weather-sunset-down.png" height=24 width=24>Sunset</p></div>
+              <div  class='drag draggable' id="drag" data-value="time"><p><img src="/img/calendar-clock.png" height=24 width=24>Date/Time</p></div>
 </center>
 </div>
 
+
+
   <div id="when" class="col-xs-6 col-sm-3 if" style="border-right: 1px solid rgba(0,0,0,0.1);">
   <span class="title">When....</span><br><br>
-  <div  class='drag draggable' id="drag" data-value="sunrise starts"><p><img src="/img/weather-sunny.png" height=24 width=24>Sunrise</p></div>
 <span>
   <div class="sortable" class="droppable" STYLE="height: 100%; border: 1px solid rgba(0,0,0,0.1);"> drop me here </div>
   </span>
