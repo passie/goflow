@@ -6,7 +6,7 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
-
+<script src="js/wickedpicker.min.js"></script>
 </head>
 
 <body class="container">
@@ -48,6 +48,17 @@
   });
 </script>
 
+ <script>
+ $(document).ready( function() {
+    $('.timepicker').wickedpicker();
+ 
+ });
+
+function reload() {
+    location.reload();
+}
+  </script>
+
 <div class="row">
 
 <div id="rulediv">
@@ -66,6 +77,7 @@
   <br><br>
   <center>
  
+
   <% for(var i=0; i < dev.length; i++) { %>
 
    <div  class='drag draggable' id="drag" name="<%= dev[i].id %>" data-value="<%= dev[i].name %>">
@@ -90,11 +102,10 @@
       <br><br>
         <div  class='drag draggable' id="drag" data-value="sunrise starts"><p><img src="/img/weather-sunset-up.png" height=24 width=24>Sunrise</p></div>
            <div  class='drag draggable' id="drag" data-value="sunrise stops"><p><img src="/img/weather-sunset-down.png" height=24 width=24>Sunset</p></div>
-              <div  class='drag draggable' id="drag" data-value="time"><p><img src="/img/calendar-clock.png" height=24 width=24>Date/Time</p></div>
+            <div  class='drag draggable' id="drag" data-value="time"><p><img src="/img/calendar-clock.png" height=24 width=24><input type="text" name="timepicker" class="timepicker" id="time"/></p></div>
+  
 </center>
 </div>
-
-
 
   <div id="when" class="col-xs-6 col-sm-3 if" style="border-right: 1px solid rgba(0,0,0,0.1);">
   <span class="title">When....</span><br><br>
@@ -115,7 +126,7 @@
   <br> <br> <br> <br>
 
   <input id="save" value="save ..."></input>
-  <button id="btnR" type="reset" value="Cancel">Cancel</button>
+  <button id="btnR" type="reset" value="Cancel" class="cancel" onclick="reload()">Cancel</button>
   <button id="btn1">Save rule</button>
 
 <script>
@@ -139,14 +150,17 @@ $(document).ready(function(){
     //when sunset starts then switch tuinverlichting on
     //"when it is after 01:00 and if tuinverlichting is turned on then switch tuinverlichting off"
     //when its 8:00 or when its 7:00 then turn keukenlamp on
-    
+    var ruleName = $("#save").val();
     var divValue = $("#when .drag").attr('data-value');
+    
     var thenValue = $("#then .drag").attr('data-value');
     if (thenValue === undefined){
     alert('Please add devices + events then click save rule'); 
+    } else if (ruleName === undefined) {
+    alert(ruleName); 
     } else {
        // alert("text: " + $("#drag").text());
-       alert('when ' + divValue + ' then switch ' + thenValue + ' on');
+       alert('Rule name ' + ruleName + ':  ' + 'when ' + divValue + ' then switch ' + thenValue + ' on');
        }
     });
 });
