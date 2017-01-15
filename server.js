@@ -77,6 +77,16 @@ socket.on('connect', function() {
         console.log(getPredicatePresets);
     });
 
+    socket.on('deviceAdded', function(device) {
+        console.log("deviceAdded:\n");
+        console.log(device)
+        app.emit('client_count', 'hoi')
+    });
+
+    socket.on('connection', function(socket) {
+        console.log('a user connected');
+    });
+
     socket.on('rules', function(rules) {
         //console.log(rules);
     });
@@ -96,7 +106,6 @@ socket.on('connect', function() {
 
     // use data from getDevices and send to index.ejs
     app.get('/', function(req, res, devices) {
-
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
         var device = socket.device;
         var variable = socket.variable;

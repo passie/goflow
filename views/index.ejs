@@ -173,7 +173,15 @@ $(document).ready(function(){
  <footer class="footer">
         <% include ../partials/footer %>
     </footer>
-       
+       <script>
+    socket.on('connect', function(msg){
+    $('#client_count').append($('<li>').text(msg));
+  });
+       </script>
+       <div id="client_count">
+
+       doei
+       </div>
             </body>
 
             </html>
