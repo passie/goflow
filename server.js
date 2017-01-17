@@ -24,7 +24,7 @@ var io = require('socket.io-client');
 
 
 var host = 'dinges.synology.me';
-var port = 9191;
+var port = 4545;
 var u = encodeURIComponent('admin');
 var p = encodeURIComponent('leonisdebeste');
 var socket = io('http://' + host + ':' + port + '/?username=' + u + '&password=' + p, {
@@ -77,16 +77,6 @@ socket.on('connect', function() {
         console.log(getPredicatePresets);
     });
 
-    socket.on('deviceAdded', function(device) {
-        console.log("deviceAdded:\n");
-        console.log(device)
-        app.emit('client_count', 'hoi')
-    });
-
-    socket.on('connection', function(socket) {
-        console.log('a user connected');
-    });
-
     socket.on('rules', function(rules) {
         //console.log(rules);
     });
@@ -100,12 +90,14 @@ socket.on('connect', function() {
        });*/
 
 
+
     // var io = require('socket.io').listen(server);
 
     // use res.render to load up an ejs view file
 
     // use data from getDevices and send to index.ejs
     app.get('/', function(req, res, devices) {
+
         res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
         var device = socket.device;
         var variable = socket.variable;
