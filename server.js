@@ -42,7 +42,7 @@ socket.on('connect', function() {
 
     //get list of devices and save for later
     socket.on('devices', function(getDevices) {
-        var device = getDevices[1].name;
+        //var device = getDevices[1].name;
         //console.log(getDevices);
         //console.log("iets", getDevices[4].name);
         socket.device = getDevices;
@@ -50,7 +50,10 @@ socket.on('connect', function() {
         //console.log(socket.device);
 
     });
-
+    socket.on('groups', function(getGroups) {
+        console.log(getGroups);
+        socket.groups = getGroups;
+    });
 
     socket.on('variables', function(getVariables) {
         //var device = getVariables[1].name;
@@ -74,7 +77,7 @@ socket.on('connect', function() {
         //var device = getVariables[1].name;
         //console.log(getDevices);
         //console.log("iets", getDevices[4].name);
-        console.log(getPredicatePresets);
+        //console.log(getPredicatePresets);
     });
 
     socket.on('rules', function(rules) {
@@ -102,6 +105,7 @@ socket.on('connect', function() {
         var device = socket.device;
         var variable = socket.variable;
         var rules = socket.Rules;
+        var groups = socket.groups;
         //console.log(device);
         //console.log(variable);
         //console.log("Session: %j", device);
@@ -116,7 +120,8 @@ socket.on('connect', function() {
             //drinks: drinks
             dev: device,
             devvar: variable,
-            rules: rules
+            rules: rules,
+            groups: groups
         });
     });
 

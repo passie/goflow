@@ -31,13 +31,14 @@ socket.on('connect', function() {
     socket.on('devices', function(getDevices) {
         socket.device = getDevices;
         //hier werkt het 
-        console.log(getDevices);
+        //console.log(getDevices);
+
     });
 
     io.on('connection', function(socket) {
         var device = socket.device;
         // hier niet?
-        console.log(device);
+        //console.log(device);
         socket.on('chat message', function(msg) {
             console.log('chat message' + device);
             io.emit('chat message', 'message: ' + msg);

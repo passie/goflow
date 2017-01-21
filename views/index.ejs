@@ -77,6 +77,12 @@ function reload() {
   <br><br>
   <center>
  
+ <% for(var i=0; i < groups.length; i++) { %>
+    <%= ' ' + groups[i].name  %>
+    </br>
+    <%= ' ' + groups[i].devices %>
+    </br>
+ <% } %>
 
   <% for(var i=0; i < dev.length; i++) { %>
 
@@ -180,7 +186,7 @@ $(document).ready(function(){
        </script>
        <div id="client_count">
 
-       doei
+  
        </div>
             </body>
 
