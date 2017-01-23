@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Slideout Demo</title>
+    <meta http-equiv="cleartype" content="on">
+    <meta name="MobileOptimized" content="320">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="css/fonts.css">
+  </head>
+  <body>
+
+    <nav id="menu" class="menu">
+  <section class="menu-section">
+    <h3 class="menu-section-title">Menu</h3>
+    <ul class="menu-section-list">
+      <li><a href="devices" target="_blank">Devices</a></li>
+      <li><a href="rules" target="_blank">Rules</a></li>
+      <li><a href="goflow" target="_blank">Goflow</a></li>
+       <li><a href="credits" target="_blank">Credits</a></li>
+    </ul>
+  </section>
+
+</nav>
+
+<main id="main" class="panel">
+
+  <header class="panel-header">
+    <button class="btn-hamburger js-slideout-toggle">
+      <span class="tooltip"></span>
+    </button>
+    <h1 class="title">Slideout.js</h1>
+    <h2 class="subtitle">A touch slideout navigation menu for your mobile web apps.</h2>
+  </header>
+
+  <div class="panel-demo">
+    
+  <section class="box">
+    <h2 class="box-title">Features</h2>
+    <div class="box-content">
+      <ul>
+        <li>Dependency-free.</li>
+        <li>Simple markup.</li>
+        <li>Native scrolling.</li>
+        <li>Easy customization.</li>
+        <li>CSS transforms &amp; transitions.</li>
+        <li>Just 4 Kb!</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="box">
+    <h2 class="box-title">Installation</h2>
+    <div class="box-content">
+      <pre>
+$ npm install slideout
+
+$ bower install https://github.com/mango/slideout.git
+
+$ component install mango/slideout</pre>
+    </div>
+  </section>
+
+  <section class="box">
+    <h2 class="box-title">Usage</h2>
+    <div class="box-content">
+      <p>1. First of all, you'll need to have a menu ("#menu") and a main content ("#panel") into your body.</p>
+      <pre><code class="language-markup">
+&lt;nav id=&quot;menu&quot;&gt;
+&lt;header&gt;
+  &lt;h2&gt;Menu&lt;/h2&gt;
+&lt;/header&gt;
+&lt;/nav&gt;
+
+&lt;main id=&quot;panel&quot;&gt;
+&lt;header&gt;
+  &lt;h2&gt;Panel&lt;/h2&gt;
+&lt;/header&gt;
+&lt;/main&gt;</code></pre>
+
+      <p>2. Add the Slideout.js styles (index.css) in your web application.</p>
+      <pre><code class="language-css">
+body {
+width: 100%;
+height: 100%;
+}
+
+.slideout-menu {
+position: fixed;
+left: 0;
+top: 0;
+bottom: 0;
+right: 0;
+z-index: 0;
+width: 256px;
+overflow-y: auto;
+-webkit-overflow-scrolling: touch;
+display: none;
+}
+
+.slideout-panel {
+position: relative;
+z-index: 1;
+}
+
+.slideout-open,
+.slideout-open body,
+.slideout-open .slideout-panel {
+overflow: hidden;
+}
+
+.slideout-open .slideout-menu {
+display: block;
+}</code></pre>
+
+      <p>3. Then you just include Slideout.js and create a new instace with some options:</p>
+
+      <pre><code class="language-markup">
+&lt;script src=&quot;dist/slideout.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+var slideout = new Slideout({
+  'panel': document.getElementById('panel'),
+  'menu': document.getElementById('menu'),
+  'padding': 256,
+  'tolerance': 70
+});
+&lt;/script&gt;</code></pre>
+    </div>
+  </section>
+
+  <footer class="panel-footer">
+    <p>with <span class="heart">❤</span> by <a href="https://getmango.com/en" target="_blank">Mango</a></p>
+  </footer>
+</main>
+    <h1 class="title">Slideout.js</h1>
+</br></br></br></br>
+☰
+    blablabla
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
+    <script>
+  var slideout = new Slideout({
+  'panel': document.getElementById('main'),
+  'menu': document.getElementById('menu'),
+  'padding': 256,
+  'tolerance': 70
+});
+
+document.querySelector('.js-slideout-toggle').addEventListener('click', function() {
+  slideout.toggle();
+});
+    </script>
+
+  </body>
+</html>
