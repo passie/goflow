@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script src="js/wickedpicker.min.js"></script>
+
 </head>
 
 <body class="container">
@@ -36,6 +37,7 @@
     hoverClass: 'ui-state-active',
     drop: function(event, ui) {
         $(this).addClass('ui-state-highlight').find('p');
+        $(this).attr("drag", "").addClass( $(ui.drag).attr("class") );
     }
 });
   } );
@@ -61,14 +63,7 @@ function reload() {
 
 <div class="row">
 
-<div id="rulediv">
-<span class="title">Select Rule..</span><br><br>
- <select id="rulelist"> 
-  <% for(var i=0; i < rules.length; i++) { %>
-  <option  value="<%= rules[i].name %>"><%= rules[i].string %></option>
-  <% } %>
-</select>
-</div>
+
 
 
 
@@ -76,14 +71,6 @@ function reload() {
   <span class="title">Devices</span>
   <br><br>
   <center>
- 
- <% for(var i=0; i < groups.length; i++) { %>
-    <%= ' ' + groups[i].name  %>
-    </br>
-    <%= ' ' + groups[i].devices %>
-    </br>
- <% } %>
-
   <% for(var i=0; i < dev.length; i++) { %>
 
    <div  class='drag draggable' id="drag" name="<%= dev[i].id %>" data-value="<%= dev[i].name %>">
@@ -109,7 +96,7 @@ function reload() {
         <div  class='drag draggable' id="drag" data-value="sunrise starts"><p><img src="/img/weather-sunset-up.png" height=24 width=24>Sunrise</p></div>
            <div  class='drag draggable' id="drag" data-value="sunrise stops"><p><img src="/img/weather-sunset-down.png" height=24 width=24>Sunset</p></div>
             <div  class='drag draggable' id="drag" data-value="time"><p><img src="/img/calendar-clock.png" height=24 width=24><input type="text" name="timepicker" class="timepicker" id="time"/></p></div>
-  
+
 </center>
 </div>
 
@@ -170,6 +157,9 @@ $(document).ready(function(){
        }
     });
 });
+
+
+
 </script>
   </div>
 </div>

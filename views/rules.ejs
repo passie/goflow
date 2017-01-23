@@ -1,0 +1,9 @@
+<div id="rulediv">
+<span class="title">Select Rule..</span><br><br>
+ <select id="rulelist">
+ <option value="select rule">select rule</option>
+  <% for(var i=0; i < rules.length; i++) { %>
+  <option  value="<%= rules[i].name %>"><%= rules[i].string %></option>
+  <% } %>
+</select>
+</div>
