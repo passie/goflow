@@ -9,4 +9,4 @@ goflow
    <div id="draggable" class='drag' name="<%= devvar[i].id %>">
    <p><%= devvar[i].name %></p>
    </div>
-<% } %>
+<% } %># goflow2
